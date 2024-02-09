@@ -1,0 +1,38 @@
+[gd_scene load_steps=3 format=3 uid="uid://d4xx7wkb05e7"]
+
+[ext_resource type="PackedScene" uid="uid://bd2pba4jtywfv" path="res://characters/player.tscn" id="1_ut0e8"]
+[ext_resource type="PackedScene" uid="uid://e3ayd75iv0mv" path="res://levels/tree.tscn" id="2_vp6su"]
+
+[node name="GameLevel" type="Node2D"]
+z_index = -2
+y_sort_enabled = true
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(28.6341, 16.1988)
+size_flags_horizontal = 4
+mouse_filter = 2
+
+[node name="Player" parent="." instance=ExtResource("1_ut0e8")]
+
+[node name="Tree" parent="." instance=ExtResource("2_vp6su")]
+position = Vector2(881, 130)
+
+[node name="Tree2" parent="." instance=ExtResource("2_vp6su")]
+position = Vector2(618, 391)
+
+[node name="Tree3" parent="." instance=ExtResource("2_vp6su")]
+position = Vector2(311, 150)
+
+[node name="Tree4" parent="." instance=ExtResource("2_vp6su")]
+position = Vector2(172, 246)
+
+[node name="Tree5" parent="." instance=ExtResource("2_vp6su")]
+position = Vector2(913, 345)
+
+[node name="Tree6" parent="." instance=ExtResource("2_vp6su")]
+position = Vector2(341, 464)
+
+[node name="Tree7" parent="." instance=ExtResource("2_vp6su")]
+position = Vector2(561, 59)

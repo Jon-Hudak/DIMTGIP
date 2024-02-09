@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://e3ayd75iv0mv"]
+
+[ext_resource type="Script" path="res://levels/tree.gd" id="1_1kkos"]
+[ext_resource type="Texture2D" uid="uid://bd2bccfe0bkik" path="res://Assets/Tree1.png" id="1_wtbid"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kv8h6"]
+size = Vector2(99, 131)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_o6yxe"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_wtbid")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Tree" type="StaticBody2D"]
+z_index = 1
+position = Vector2(537, 189)
+disable_mode = 2
+input_pickable = true
+script = ExtResource("1_1kkos")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["trees"]]
+visibility_layer = 3
+z_index = 1
+position = Vector2(-2.5, 11.5)
+shape = SubResource("RectangleShape2D_kv8h6")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_o6yxe")
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]

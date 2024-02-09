@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://cukcr32n0ddc4"]
+
+[ext_resource type="Script" path="res://levels/bullet.gd" id="1_3k0yc"]
+[ext_resource type="Texture2D" uid="uid://c5magvp6g7t3x" path="res://Assets/fistAttack.png" id="2_th8fw"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_p8xjh"]
+radius = 43.0
+
+[node name="Bullet" type="CharacterBody2D"]
+position = Vector2(443, 207)
+script = ExtResource("1_3k0yc")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-67, 9)
+texture = ExtResource("2_th8fw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-21, 5)
+shape = SubResource("CircleShape2D_p8xjh")
+
+[node name="DeathTimer" type="Timer" parent="."]
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[connection signal="timeout" from="DeathTimer" to="." method="_on_death_timer_timeout"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

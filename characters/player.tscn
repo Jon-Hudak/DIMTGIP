@@ -1,0 +1,68 @@
+[gd_scene load_steps=10 format=3 uid="uid://bd2pba4jtywfv"]
+
+[ext_resource type="Texture2D" uid="uid://g20x0ygccslg" path="res://Assets/shooting1.png" id="1_ihvn6"]
+[ext_resource type="Script" path="res://characters/player.gd" id="1_ycvsj"]
+[ext_resource type="Texture2D" uid="uid://bqv6gdne577tr" path="res://Assets/standing1.png" id="2_256g7"]
+[ext_resource type="Texture2D" uid="uid://c5b3fntwpve57" path="res://Assets/standing2.png" id="3_k7ao6"]
+[ext_resource type="Texture2D" uid="uid://db1ht8vvsjtfy" path="res://Assets/standing3.png" id="4_ilp0u"]
+[ext_resource type="Texture2D" uid="uid://darhbap8j17h3" path="res://Assets/walking1.png" id="5_luaal"]
+[ext_resource type="Texture2D" uid="uid://dsiqd1siu6qdp" path="res://Assets/walking2.png" id="6_w4dfd"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kwvs2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_ihvn6")
+}],
+"loop": true,
+"name": &"shooting",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_256g7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_k7ao6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_ilp0u")
+}],
+"loop": true,
+"name": &"standing",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_luaal")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_w4dfd")
+}],
+"loop": true,
+"name": &"walking",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_j2irn"]
+radius = 30.0
+height = 110.0
+
+[node name="Player" type="CharacterBody2D"]
+y_sort_enabled = true
+position = Vector2(629, 216)
+disable_mode = 2
+collision_layer = 2
+input_pickable = true
+script = ExtResource("1_ycvsj")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_kwvs2")
+animation = &"shooting"
+autoplay = "standing"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-3, 1)
+shape = SubResource("CapsuleShape2D_j2irn")
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
