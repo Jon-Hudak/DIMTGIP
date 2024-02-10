@@ -1,13 +1,19 @@
-[gd_scene load_steps=3 format=3 uid="uid://d4xx7wkb05e7"]
+[gd_scene load_steps=4 format=3 uid="uid://d4xx7wkb05e7"]
 
+[ext_resource type="Script" path="res://levels/game_level.gd" id="1_5kwvi"]
 [ext_resource type="PackedScene" uid="uid://bd2pba4jtywfv" path="res://characters/player.tscn" id="1_ut0e8"]
-[ext_resource type="PackedScene" uid="uid://e3ayd75iv0mv" path="res://levels/tree.tscn" id="2_vp6su"]
+[ext_resource type="PackedScene" uid="uid://e3ayd75iv0mv" path="res://tree.tscn" id="2_vp6su"]
 
 [node name="GameLevel" type="Node2D"]
 z_index = -2
 y_sort_enabled = true
+script = ExtResource("1_5kwvi")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -100
+follow_viewport_enabled = true
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
 offset_right = 40.0
 offset_bottom = 40.0
 scale = Vector2(28.6341, 16.1988)
@@ -26,7 +32,7 @@ position = Vector2(618, 391)
 position = Vector2(311, 150)
 
 [node name="Tree4" parent="." instance=ExtResource("2_vp6su")]
-position = Vector2(172, 246)
+position = Vector2(449, 253)
 
 [node name="Tree5" parent="." instance=ExtResource("2_vp6su")]
 position = Vector2(913, 345)
