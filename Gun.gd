@@ -48,5 +48,5 @@ func shoot():
 	emit_signal("gun_shot")
 	
 func change_weapon():
-	timer.start(resource.sfire_rate)
+	timer.start(resource.fire_rate)
 	$RotationAnchor/Gun1.texture=resource.gun_sprite
