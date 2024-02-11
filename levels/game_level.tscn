@@ -50,27 +50,15 @@ position = Vector2(561, 59)
 
 [node name="CharacterBody2D" parent="." instance=ExtResource("4_x3ymm")]
 position = Vector2(454, 428)
-speed = 100.0
-max_health = 100.0
-damage = 20.0
 
 [node name="CharacterBody2D2" parent="." instance=ExtResource("4_x3ymm")]
 position = Vector2(709, 110)
-speed = 100.0
-max_health = 100.0
-damage = 20.0
 
 [node name="CharacterBody2D3" parent="." instance=ExtResource("4_x3ymm")]
 position = Vector2(794, 274)
-speed = 100.0
-max_health = 100.0
-damage = 20.0
 
 [node name="CharacterBody2D4" parent="." instance=ExtResource("4_x3ymm")]
 position = Vector2(305, 335)
-speed = 100.0
-max_health = 100.0
-damage = 20.0
 
 [node name="Camera2D2" type="Camera2D" parent="." node_paths=PackedStringArray("player")]
 position = Vector2(111, 275)
