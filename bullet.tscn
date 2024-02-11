@@ -3,11 +3,14 @@
 [ext_resource type="Script" path="res://bullet.gd" id="1_ye6lc"]
 [ext_resource type="Texture2D" uid="uid://c5magvp6g7t3x" path="res://Assets/fistAttack.png" id="2_ow4fs"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_p8xjh"]
-radius = 43.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_isstg"]
+radius = 38.9791
+height = 153.983
 
 [node name="Bullet" type="Area2D"]
 top_level = true
+collision_layer = 0
+collision_mask = 5
 script = ExtResource("1_ye6lc")
 speed = 10.0
 
@@ -16,8 +19,9 @@ position = Vector2(57.5, 2)
 texture = ExtResource("2_ow4fs")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(103.5, -2)
-shape = SubResource("CircleShape2D_p8xjh")
+position = Vector2(61, 3)
+rotation = 1.60357
+shape = SubResource("CapsuleShape2D_isstg")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 position = Vector2(124.5, -7)

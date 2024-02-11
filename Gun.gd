@@ -1,36 +1,52 @@
 extends Area2D
-@onready var timer = $Timer
+
+signal gun_shot
 var can_shoot = true
-var fire_rate : float = 0.5
+@export var fire_rate : float = 1
+@export var resource:Resource
+@export var bullet_scene: PackedScene
+@export var current_weapon : Resource
+@export var change_weapon_delay = 0.5
+@onready var timer : Timer = $Timer 
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
+	
+	$RotationAnchor/Gun1.texture=resource.gun_sprite
+	
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	#hide()
-	look_at(get_global_mouse_position())
-	if Input.is_action_pressed("shoot"):
-		#show()
-		if can_shoot:
+	var enemies_in_range =	get_overlapping_bodies()
+	if enemies_in_range.size()>0:
+		var target_enemy=enemies_in_range[0]
+		look_at(target_enemy.global_position)
+		if target_enemy.global_position.x<global_position.x:
+			$RotationAnchor/Gun1.flip_v=true
+		else: 
+			$RotationAnchor/Gun1.flip_v=false
+		if timer.time_left<=0:
 			shoot()
-			can_shoot=false
-			$Timer.start(fire_rate)
-			
 		
+	
+	
+	
 
 func shoot():
-	const BULLET = preload("res://bullet.tscn")
-	var new_bullet = BULLET.instantiate()
-	show()
+
+	print(resource.weapon_name, "pew")
+	var new_bullet = bullet_scene.instantiate() 
+	new_bullet.sprite=resource.bullet_sprite
+	new_bullet.damage=resource.damage
 	new_bullet.global_position= %Muzzle.global_position
 	new_bullet.global_rotation= %Muzzle.global_rotation
+	new_bullet.sprite_scale=0.5
 	%Muzzle.add_child(new_bullet)
+	timer.start(resource.fire_rate)
+	emit_signal("gun_shot")
 	
-	
-
-
-func _on_timer_timeout():
-	can_shoot=true
+func change_weapon():
+	timer.start(resource.sfire_rate)
+	$RotationAnchor/Gun1.texture=resource.gun_sprite

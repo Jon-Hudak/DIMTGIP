@@ -1,8 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://d4xx7wkb05e7"]
+[gd_scene load_steps=9 format=3 uid="uid://d4xx7wkb05e7"]
 
 [ext_resource type="Script" path="res://levels/game_level.gd" id="1_5kwvi"]
 [ext_resource type="PackedScene" uid="uid://bd2pba4jtywfv" path="res://characters/player.tscn" id="1_ut0e8"]
 [ext_resource type="PackedScene" uid="uid://e3ayd75iv0mv" path="res://tree.tscn" id="2_vp6su"]
+[ext_resource type="PackedScene" uid="uid://dlsqo8okux5bf" path="res://vampireMob.tscn" id="4_x3ymm"]
+[ext_resource type="Script" path="res://levels/Camera.gd" id="5_64niw"]
+[ext_resource type="Script" path="res://levels/Weapons_Manager.gd" id="6_jg0ll"]
+[ext_resource type="Resource" uid="uid://cg30jcng5rnav" path="res://weapon_resources/pistol.tres" id="7_ujvyh"]
+[ext_resource type="Resource" uid="uid://b2yl3445goq7k" path="res://weapon_resources/fistGun.tres" id="8_7y3tj"]
 
 [node name="GameLevel" type="Node2D"]
 z_index = -2
@@ -11,16 +16,16 @@ script = ExtResource("1_5kwvi")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = -100
-follow_viewport_enabled = true
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 57.0
+offset_bottom = 59.0
 scale = Vector2(28.6341, 16.1988)
 size_flags_horizontal = 4
 mouse_filter = 2
 
 [node name="Player" parent="." instance=ExtResource("1_ut0e8")]
+position = Vector2(1073, 207)
 
 [node name="Tree" parent="." instance=ExtResource("2_vp6su")]
 position = Vector2(881, 130)
@@ -42,3 +47,49 @@ position = Vector2(341, 464)
 
 [node name="Tree7" parent="." instance=ExtResource("2_vp6su")]
 position = Vector2(561, 59)
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("4_x3ymm")]
+position = Vector2(454, 428)
+speed = 100.0
+max_health = 100.0
+damage = 20.0
+
+[node name="CharacterBody2D2" parent="." instance=ExtResource("4_x3ymm")]
+position = Vector2(709, 110)
+speed = 100.0
+max_health = 100.0
+damage = 20.0
+
+[node name="CharacterBody2D3" parent="." instance=ExtResource("4_x3ymm")]
+position = Vector2(794, 274)
+speed = 100.0
+max_health = 100.0
+damage = 20.0
+
+[node name="CharacterBody2D4" parent="." instance=ExtResource("4_x3ymm")]
+position = Vector2(305, 335)
+speed = 100.0
+max_health = 100.0
+damage = 20.0
+
+[node name="Camera2D2" type="Camera2D" parent="." node_paths=PackedStringArray("player")]
+position = Vector2(111, 275)
+zoom = Vector2(0.7, 0.7)
+limit_left = 0
+limit_top = 0
+limit_right = 2000
+limit_bottom = 2000
+position_smoothing_enabled = true
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+script = ExtResource("5_64niw")
+player = NodePath("../Player")
+
+[node name="Weapons_Manager" type="Node2D" parent="."]
+script = ExtResource("6_jg0ll")
+_weapon_resources = Array[Resource("res://weapon_resource.gd")]([ExtResource("7_ujvyh"), ExtResource("8_7y3tj")])
+start_weapons = Array[String](["pistol", "fistGun"])
+
+[node name="Gun_Rig" type="Node2D" parent="Weapons_Manager"]
+
+[connection signal="gun_changed" from="Weapons_Manager" to="Player" method="_on_weapons_manager_gun_changed"]

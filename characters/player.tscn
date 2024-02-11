@@ -58,6 +58,7 @@ disable_mode = 2
 collision_layer = 2
 input_pickable = true
 script = ExtResource("1_ycvsj")
+move_speed = 300.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_kwvs2")
@@ -75,9 +76,15 @@ shape = SubResource("CapsuleShape2D_j2irn")
 z_index = 1
 position = Vector2(0, 1)
 
-[node name="Bullet" parent="Gun" instance=ExtResource("8_ign7y")]
+[node name="Bullet2" parent="Gun" instance=ExtResource("8_ign7y")]
 show_behind_parent = true
 z_index = -2
 position = Vector2(192, -15)
 
+[node name="ShootAnimationTimer" type="Timer" parent="."]
+wait_time = 0.4
+one_shot = true
+
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="gun_shot" from="Gun" to="." method="_on_gun_gun_shot"]
+[connection signal="timeout" from="ShootAnimationTimer" to="." method="_on_shoot_animation_timer_timeout"]

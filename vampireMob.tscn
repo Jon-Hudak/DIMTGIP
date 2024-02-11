@@ -1,0 +1,48 @@
+[gd_scene load_steps=7 format=3 uid="uid://dlsqo8okux5bf"]
+
+[ext_resource type="Texture2D" uid="uid://bfrtqfqavf566" path="res://Assets/vampire1.png" id="1_cgcgk"]
+[ext_resource type="Script" path="res://vampireMob.gd" id="1_epd5a"]
+[ext_resource type="Texture2D" uid="uid://onoknjwhit54" path="res://Assets/vampire2.png" id="2_j4m7d"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xpnq0"]
+radius = 29.0
+height = 124.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cljyc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_cgcgk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_j4m7d")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yfqqr"]
+radius = 305.026
+
+[node name="VampireMob" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 7
+script = ExtResource("1_epd5a")
+
+[node name="HitBox" type="CollisionShape2D" parent="."]
+position = Vector2(4, 0)
+shape = SubResource("CapsuleShape2D_xpnq0")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_cljyc")
+autoplay = "default"
+
+[node name="Detection" type="Area2D" parent="."]
+collision_mask = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Detection"]
+position = Vector2(4, 0)
+shape = SubResource("CircleShape2D_yfqqr")
+
+[connection signal="body_entered" from="Detection" to="." method="_on_detection_body_entered"]
